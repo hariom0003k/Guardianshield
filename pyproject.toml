@@ -1,0 +1,57 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "guardian-shield"
+version = "2.0.0"
+description = "Enterprise-Grade Shoulder-Surfing Detection & Active Privacy Viewport Protection"
+readme = "README.md"
+requires-python = ">=3.9"
+license = { text = "MIT" }
+authors = [
+    { name = "Guardian Shield Contributors" }
+]
+keywords = [
+    "privacy",
+    "cybersecurity",
+    "shoulder-surfing",
+    "computer-vision",
+    "gaze-tracking",
+    "screen-shield",
+    "pyside6"
+]
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Intended Audience :: Developers",
+    "Intended Audience :: End Users/Desktop",
+    "Topic :: Security",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Operating System :: Microsoft :: Windows",
+    "Operating System :: POSIX :: Linux",
+]
+dependencies = [
+    "opencv-python>=4.8.0",
+    "numpy>=1.24.0",
+    "Pillow>=10.0.0",
+    "PySide6>=6.5.0",
+    "pynput>=1.7.6",
+    "PyYAML>=6.0",
+]
+
+[project.urls]
+Homepage = "https://github.com/your-username/guardian-shield"
+Repository = "https://github.com/your-username/guardian-shield.git"
+Issues = "https://github.com/your-username/guardian-shield/issues"
+
+[project.scripts]
+guardian-shield = "main:main"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["config*", "core*", "ui*"]

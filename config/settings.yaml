@@ -1,0 +1,66 @@
+# ==============================================================================
+# Guardian Shield — Configuration Settings
+# ==============================================================================
+
+system:
+  app_name: "Guardian Shield"
+  version: "2.0.0"
+  log_level: "INFO"
+  database_path: "guardian_audit.db"
+
+camera:
+  device_id: 0                     # Camera index (0 = default user-facing webcam)
+  frame_width: 640
+  frame_height: 480
+  fps_limit: 8                     # Throttled FPS to minimize CPU/battery consumption
+  enable_simulation: false         # If true, generates synthetic test stream
+
+detection:
+  min_face_size_px: 50             # Ignore tiny faces in background
+  face_detection_confidence: 0.65
+  primary_user_tolerance: 0.18     # Recognition distance threshold (strict 0.18)
+  debounce_seconds: 0.4            # Fast 0.4s reaction when peeper is added
+
+gaze:
+  gaze_sensitivity: 0.60           # Threshold for deciding eyes are aimed at screen
+  head_pose_weight: 0.35           # Weight of head yaw/pitch vs iris position
+  iris_weight: 0.65
+
+threat:
+  weights:
+    gaze: 0.40
+    proximity: 0.30                # Proximity score based on face area
+    dwell_time: 0.20               # How long unauthorized viewer has lingered
+    peeper_count: 0.10             # Multiple peepers escalate threat
+  thresholds:
+    toast_alert: 0.45              # Score needed to show toast notification
+    auto_shield: 0.82              # Score needed for instant shield deployment (if auto-shield enabled)
+
+notification:
+  position: "center"               # "center", "bottom-right", "top-right", "bottom-left", "top-left"
+  duration_seconds: 15             # Auto-dismiss timeout for toast alert
+  sound_alert: true                # Play audible chime & voice alert on peeper detection
+  show_confidence_badge: true
+
+shield:
+  default_style: "blur"            # "blur", "dim", "mosaic", "decoy"
+  blur_radius: 35
+  dim_opacity: 0.92                # 0.0 (transparent) to 1.0 (blackout)
+  decoy_type: "spreadsheet"        # "spreadsheet", "desktop", "custom"
+  decoy_image_path: ""
+  scope: "fullscreen"              # "fullscreen" or "active_window"
+  instant_unlock_hotkey: "<ctrl>+<shift>+u"
+  deploy_hotkey: "<ctrl>+<shift>+d"
+  pause_hotkey: "<ctrl>+<shift>+p"
+
+features:
+  auto_shield_enabled: false       # Additional Feature C: Auto-deploy without waiting
+  stealth_mode: false              # Additional Feature H: Silent shield, no popup
+  break_away_alarm: true           # Additional Feature I: Escalate if peeper lingers > 15s
+  break_away_timeout_sec: 15
+  session_lock_on_critical: false  # Additional Feature J: Lock Windows session on critical threat
+  proximity_sensitivity: true      # Additional Feature B: Escalate if peeper is closer
+
+trusted_faces:
+  storage_file: "trusted_profiles.json"
+  auto_trust_threshold: 0.45
